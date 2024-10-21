@@ -1,0 +1,29 @@
+name: Run ASP.NET Console App
+
+# Allow the workflow to be triggered manually
+on:
+  workflow_dispatch:  # This enables manual trigger
+  schedule:
+    - cron: '0 0 * * *'  # Optional: Keep your scheduled run if needed
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build the project
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run ASP.NET Console App
+      run: dotnet run --project MostaqlBot.sln
