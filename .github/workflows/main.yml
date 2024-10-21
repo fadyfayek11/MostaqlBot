@@ -26,4 +26,4 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Run ASP.NET Console App
-      run: dotnet run --project MostaqlBot.sln
+      run: dotnet run --project MostaqlBot/MostaqlBot.csproj
