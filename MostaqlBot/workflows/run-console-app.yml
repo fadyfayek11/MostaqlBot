@@ -1,0 +1,34 @@
+name: Run ASP.NET Console App
+
+# Controls when the workflow will run
+on:
+  schedule:
+    # Runs at 12:00 AM every day (adjust cron schedule as needed)
+    - cron: '0 0 * * *'
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository with the code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up .NET SDK (adjust version if needed)
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.0'
+
+    # Step 3: Restore dependencies
+    - name: Restore dependencies
+      run: dotnet restore
+
+    # Step 4: Build the project
+    - name: Build the project
+      run: dotnet build --configuration Release --no-restore
+
+    # Step 5: Run the console app
+    - name: Run ASP.NET Console App
+      run: dotnet run --project MostaqlBot.sln
